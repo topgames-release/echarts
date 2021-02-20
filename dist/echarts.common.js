@@ -46584,9 +46584,7 @@
           return;
         }
 
-        handle.onclick = function (params) {
-          return clickFunc(params);
-        };
+        clickFunc();
       };
 
       BaseAxisPointer.prototype._onHandleDragMove = function (dx, dy) {

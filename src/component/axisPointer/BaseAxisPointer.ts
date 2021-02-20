@@ -420,7 +420,7 @@ class BaseAxisPointer implements AxisPointer {
         if (!clickFunc) {
             return;
         }
-        handle.onclick = (params) => clickFunc(params);
+        clickFunc();
     }
 
     private _onHandleDragMove(dx: number, dy: number) {
