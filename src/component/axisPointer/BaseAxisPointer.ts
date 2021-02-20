@@ -420,7 +420,11 @@ class BaseAxisPointer implements AxisPointer {
         if (!clickFunc) {
             return;
         }
-        clickFunc();
+        clickFunc(this._lastValue);
+
+        this._api.dispatchAction({
+            type: 'hideTip'
+        });
     }
 
     private _onHandleDragMove(dx: number, dy: number) {

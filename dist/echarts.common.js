@@ -46584,7 +46584,11 @@
           return;
         }
 
-        clickFunc();
+        clickFunc(this._lastValue);
+
+        this._api.dispatchAction({
+          type: 'hideTip'
+        });
       };
 
       BaseAxisPointer.prototype._onHandleDragMove = function (dx, dy) {
