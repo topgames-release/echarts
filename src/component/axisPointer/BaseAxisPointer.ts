@@ -359,6 +359,7 @@ class BaseAxisPointer implements AxisPointer {
                 {
                     cursor: 'move',
                     draggable: true,
+                    onclick: bind(this._onHandleClick, this),
                     onmousemove(e) {
                         // Fot mobile devicem, prevent screen slider on the button.
                         eventTool.stop(e.event);
@@ -406,6 +407,20 @@ class BaseAxisPointer implements AxisPointer {
                 value, this._axisModel, this._axisPointerModel
             ))
         );
+    }
+
+    private _onHandleClick() {
+        const handle = this._handle;
+        if (!handle) {
+            return;
+        }
+        const axisPointerModel = this._axisPointerModel;
+        const handleModel = axisPointerModel.getModel('handle');
+        const clickFunc = handleModel.get('clicker') as Function;
+        if (!clickFunc) {
+            return;
+        }
+        handle.onclick = (params) => clickFunc(params);
     }
 
     private _onHandleDragMove(dx: number, dy: number) {

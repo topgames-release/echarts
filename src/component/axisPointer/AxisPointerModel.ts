@@ -138,7 +138,9 @@ class AxisPointerModel extends ComponentModel<AxisPointerOption> {
             shadowOffsetY: 2,
 
             // For mobile performance
-            throttle: 40
+            throttle: 40,
+
+            clicker: null
         }
     };
 }

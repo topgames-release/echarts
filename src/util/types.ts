@@ -1435,7 +1435,12 @@ export interface CommonAxisPointerOption {
         /**
          * Throttle for mobile performance
          */
-        throttle?: number
+        throttle?: number,
+
+        /**
+         *
+         */
+        clicker?: Function
     } & ShadowOptionMixin
 
 

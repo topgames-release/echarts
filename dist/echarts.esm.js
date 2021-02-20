@@ -23252,7 +23252,9 @@ function defaultLoading(api, opts) {
       fontWeight: opts.fontWeight,
       fontStyle: opts.fontStyle,
       fontFamily: opts.fontFamily
-    }
+    },
+    zlevel: opts.zlevel,
+    z: 10001
   });
   var labelRect = new Rect({
     style: {
@@ -71454,6 +71456,7 @@ function () {
       handle = this._handle = createIcon(handleModel.get('icon'), {
         cursor: 'move',
         draggable: true,
+        onclick: bind$1(this._onHandleClick, this),
         onmousemove: function (e) {
           // Fot mobile devicem, prevent screen slider on the button.
           stop(e.event);
@@ -71484,6 +71487,26 @@ function () {
 
   BaseAxisPointer.prototype._moveHandleToValue = function (value, isInit) {
     updateProps$1(this._axisPointerModel, !isInit && this._moveAnimation, this._handle, getHandleTransProps(this.getHandleTransform(value, this._axisModel, this._axisPointerModel)));
+  };
+
+  BaseAxisPointer.prototype._onHandleClick = function () {
+    var handle = this._handle;
+
+    if (!handle) {
+      return;
+    }
+
+    var axisPointerModel = this._axisPointerModel;
+    var handleModel = axisPointerModel.getModel('handle');
+    var clickFunc = handleModel.get('clicker');
+
+    if (!clickFunc) {
+      return;
+    }
+
+    handle.onclick = function (params) {
+      return clickFunc(params);
+    };
   };
 
   BaseAxisPointer.prototype._onHandleDragMove = function (dx, dy) {
@@ -71971,7 +71994,8 @@ function (_super) {
       shadowOffsetX: 0,
       shadowOffsetY: 2,
       // For mobile performance
-      throttle: 40
+      throttle: 40,
+      clicker: null
     }
   };
   return AxisPointerModel;
