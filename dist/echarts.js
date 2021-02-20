@@ -71495,7 +71495,7 @@
         updateProps$1(this._axisPointerModel, !isInit && this._moveAnimation, this._handle, getHandleTransProps(this.getHandleTransform(value, this._axisModel, this._axisPointerModel)));
       };
 
-      BaseAxisPointer.prototype._onHandleClick = function () {
+      BaseAxisPointer.prototype._onHandleClick = function (e) {
         var handle = this._handle;
 
         if (!handle) {
@@ -71510,7 +71510,7 @@
           return;
         }
 
-        clickFunc(this._lastValue);
+        clickFunc(e, this._lastValue);
 
         this._api.dispatchAction({
           type: 'hideTip'

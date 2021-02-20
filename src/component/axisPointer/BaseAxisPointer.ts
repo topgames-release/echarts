@@ -28,7 +28,7 @@ import { AxisPointer } from './AxisPointer';
 import { AxisBaseModel } from '../../coord/AxisBaseModel';
 import ExtensionAPI from '../../core/ExtensionAPI';
 import Displayable, { DisplayableProps } from 'zrender/src/graphic/Displayable';
-import Element from 'zrender/src/Element';
+import Element, { ElementEvent } from 'zrender/src/Element';
 import { VerticalAlign, HorizontalAlign, CommonAxisPointerOption } from '../../util/types';
 import { PathProps } from 'zrender/src/graphic/Path';
 import Model from '../../model/Model';
@@ -409,7 +409,7 @@ class BaseAxisPointer implements AxisPointer {
         );
     }
 
-    private _onHandleClick() {
+    private _onHandleClick(e: ElementEvent) {
         const handle = this._handle;
         if (!handle) {
             return;
@@ -420,8 +420,7 @@ class BaseAxisPointer implements AxisPointer {
         if (!clickFunc) {
             return;
         }
-        clickFunc(this._lastValue);
-
+        clickFunc(e, this._lastValue);
         this._api.dispatchAction({
             type: 'hideTip'
         });
