@@ -46534,7 +46534,7 @@
         if (!this._handle) {
           isInit = true;
           handle = this._handle = createIcon(handleModel.get('icon'), {
-            cursor: 'move',
+            // cursor: 'grab',
             draggable: true,
             onclick: bind$1(this._onHandleClick, this),
             onmousemove: function (e) {

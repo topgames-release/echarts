@@ -357,7 +357,7 @@ class BaseAxisPointer implements AxisPointer {
             handle = this._handle = graphic.createIcon(
                 handleModel.get('icon'),
                 {
-                    cursor: 'move',
+                    // cursor: 'grab',
                     draggable: true,
                     onclick: bind(this._onHandleClick, this),
                     onmousemove(e) {
